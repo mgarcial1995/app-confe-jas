@@ -7,5 +7,3 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 });
-// yellcj: "#F8AE1A",
-// griscj: "#333333",

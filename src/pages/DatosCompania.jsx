@@ -24,6 +24,8 @@ const DatosCompania = () => {
   const { id, type } = useParams();
   const [compania, setCompania] = useState(datocompania);
   const [participantes, setParticipantes] = useState([]);
+  const [partVarones, setPartVarones] = useState(0);
+  const [partMujeres, setParMujeres] = useState(0);
   const [sugerenciaParticipantes, setSugerenciaParticipantes] = useState([]);
 
   useEffect(() => {
@@ -45,6 +47,8 @@ const DatosCompania = () => {
   const obtenerParticipantesCompania = async () => {
     try {
       const { data } = await getParticipantesCompania(id);
+      setPartVarones(data.filter(e => e.sexo === "Masculino").length)
+      setParMujeres(data.filter(e => e.sexo === "Femenino").length)
       setParticipantes(data);
     } catch (error) {
       console.error("Error al obtener datos de la habitación", error);
@@ -133,6 +137,10 @@ const DatosCompania = () => {
                 />
               </div>
             )}
+            {type === "edit" && <div className="flex flex-col w-56">
+              <p>Varones: {partVarones}</p>
+              <p>Mujeres: {partMujeres}</p>
+            </div>}
             <div className="flex flex-col w-56">
               <label>Edad mínima de participantes</label>
               <input
