@@ -47,8 +47,8 @@ const DatosCompania = () => {
   const obtenerParticipantesCompania = async () => {
     try {
       const { data } = await getParticipantesCompania(id);
-      setPartVarones(data.filter(e => e.sexo === "Masculino").length)
-      setParMujeres(data.filter(e => e.sexo === "Femenino").length)
+      setPartVarones(data.filter((e) => e.sexo === "Masculino").length);
+      setParMujeres(data.filter((e) => e.sexo === "Femenino").length);
       setParticipantes(data);
     } catch (error) {
       console.error("Error al obtener datos de la habitación", error);
@@ -90,7 +90,7 @@ const DatosCompania = () => {
       idparticipante: idPart,
       idCompania: Number(id),
     };
-    console.log(obj)
+    console.log(obj);
     await asignarParticipanteACompania(obj);
     await obtenerParticipantesCompania();
     await obtenerParticipantesSugerenciaEdadCompania();
@@ -137,10 +137,12 @@ const DatosCompania = () => {
                 />
               </div>
             )}
-            {type === "edit" && <div className="flex flex-col w-56">
-              <p>Varones: {partVarones}</p>
-              <p>Mujeres: {partMujeres}</p>
-            </div>}
+            {type === "edit" && (
+              <div className="flex flex-col w-56">
+                <div><span className="font-bold">Total Varones:</span> {partVarones}</div>
+                <div><span className="font-bold">Total Mujeres:</span> {partMujeres}</div>
+              </div>
+            )}
             <div className="flex flex-col w-56">
               <label>Edad mínima de participantes</label>
               <input
@@ -191,6 +193,7 @@ const DatosCompania = () => {
                     <th className="px-2 py-1 border"></th>
                     <th className="px-2 py-1 border">Nombre</th>
                     <th className="px-2 py-1 border">Estaca</th>
+                    <th className="px-2 py-1 border">Edad</th>
                     <th className="px-2 py-1 border"></th>
                   </tr>
                 </thead>
@@ -211,6 +214,7 @@ const DatosCompania = () => {
                         {p.nombres} {p.apellidos}
                       </td>
                       <td className="border px-2 py-1">{p.estaca}</td>
+                      <td className="border px-2 py-1">{p.edad}</td>
 
                       <td className="border px-2 py-1 ">
                         <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-center">
@@ -265,9 +269,11 @@ const DatosCompania = () => {
                     <td className="border px-2 py-1 ">
                       <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-center">
                         <button
-                          onClick={() =>asignarCompania(p.id)}
+                          onClick={() => asignarCompania(p.id)}
                           className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A]"
-                        >Agregar</button>
+                        >
+                          Agregar
+                        </button>
                         {/* <Link
                           to={"/participante/edit/" + p.id}
                           className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A]"
