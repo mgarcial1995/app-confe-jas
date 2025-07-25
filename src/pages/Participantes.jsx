@@ -57,12 +57,14 @@ const Participantes = () => {
             />
           </div>
           <div>
+            <label>Filtrar por estaca</label>
             <AsyncSelect
               cacheOptions
               loadOptions={obtenerEstacas}
               value={{ label: filtroEstaca, value: filtroEstaca }}
               onChange={(e) => setFiltroEstaca(e.value)}
               defaultOptions
+              placeholder="Seleccionar Estaca"
               className="z-50"
             />
           </div>

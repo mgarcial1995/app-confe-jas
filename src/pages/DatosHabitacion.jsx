@@ -143,8 +143,56 @@ const DatosHabitacion = () => {
             </div>
           </div>
           <div>
-            <p className="font-bold">Participantes:</p>
-            {participantes.map((part, i) => {
+            {participantes.length > 0 && (
+              <div className="w-full md:w-1/2">
+                <p className="font-bold">Participantes:</p>
+                <table className="table-auto w-full border">
+                  <thead className="w-full">
+                    <tr className="bg-gray-200">
+                      <th className="px-2 py-1 border"></th>
+                      <th className="px-2 py-1 border">Nombre</th>
+                      <th className="px-2 py-1 border">Estaca</th>
+                      <th className="px-2 py-1 border">Edad</th>
+                      <th className="px-2 py-1 border">Compañia</th>
+                      <th className="px-2 py-1 border"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="w-full">
+                    {participantes.map((p) => (
+                      <tr key={p.id} className="text-sm">
+                        <td className="border px-2 py-1">
+                          <FontAwesomeIcon
+                            className={
+                              p.sexo === "Masculino"
+                                ? "text-blue-500"
+                                : "text-pink-500"
+                            }
+                            icon="user"
+                          />
+                        </td>
+                        <td className="border px-2 py-1">
+                          {p.nombres} {p.apellidos}
+                        </td>
+                        <td className="border px-2 py-1">{p.estaca}</td>
+                        <td className="border px-2 py-1">{p.edad}</td>
+                        <td className="border px-2 py-1">{p.num_compania || ''}</td>
+                        <td className="border px-2 py-1 ">
+                          <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-center">
+                            <Link
+                              to={"/participante/edit/" + p.id}
+                              className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A] transition"
+                            >
+                              Ver
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {/* {participantes.map((part, i) => {
               return (
                 <div key={i}>
                   <p>
@@ -152,7 +200,7 @@ const DatosHabitacion = () => {
                   </p>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
         <div className="w-full gap-4 flex mt-4 my-2 mb-4">
