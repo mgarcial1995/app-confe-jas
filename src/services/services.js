@@ -1,16 +1,19 @@
 import api from "./apiClient";
 
-export const get = (path, params = {}) => api.get(path, { params });
+export const get = (path, options = {}) => api.get(path, options);
 export const post = (path, data) => api.post(path, data);
 export const put = (path, data) => api.put(path, data);
 export const del = (path) => api.delete(path);
 
-// También puedes hacer funciones específicas:
 export const crearParticipante = (data) =>
   post("/participante/crearParticipante", data);
 export const getParticipantes = () => get("/participante/obtenerParticipantes");
-export const exportarParticipantesAExcel = () => get("/participante/exportarParticipantesAExcel");
-
+// export const exportarParticipantesAExcel = () => get("/participante/exportarParticipantesAExcel");
+export const exportarParticipantesAExcel = async () => {
+  return get('/participante/exportarParticipantesAExcel', {
+    responseType: 'blob', // ✅ Esto ahora sí funciona como debería
+  });
+};
 export const asignarParticipanteACompania = (data) =>
   post("/participante/asignarParticipanteACompania", data);
 
