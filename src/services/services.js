@@ -31,6 +31,7 @@ export const getParticipantesPorEdadPorCompania = (id) => get("/compania/obtener
 export const crearCompania = (data) => post("/compania/crearCompania/",data);
 export const editarCompania = (data) => put("/compania/editarCompania/",data);
 export const getParticipantesCompania = (id) => get("/compania/obtenerParticipantesPorNumeroCompania/"+id);
+export const getParticipantesNumeroCompania = (numComp) => get("/compania/obtenerParticipantesNumeroCompania/"+numComp);
 export const eliminarCompania = (id) => del("/compania/eliminarCompania/"+id);
 export const getCompaniasConParticipantes = () =>
   get("/compania/obtenerCompaniasConParticipantes");

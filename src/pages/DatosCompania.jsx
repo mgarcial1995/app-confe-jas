@@ -274,12 +274,6 @@ const DatosCompania = () => {
                         >
                           Agregar
                         </button>
-                        {/* <Link
-                          to={"/participante/edit/" + p.id}
-                          className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A]"
-                        >
-                          Ver
-                        </Link> */}
                       </div>
                     </td>
                   </tr>
