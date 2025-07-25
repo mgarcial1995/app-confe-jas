@@ -9,6 +9,7 @@ export const del = (path) => api.delete(path);
 export const crearParticipante = (data) =>
   post("/participante/crearParticipante", data);
 export const getParticipantes = () => get("/participante/obtenerParticipantes");
+export const exportarParticipantesAExcel = () => get("/participante/exportarParticipantesAExcel");
 
 export const asignarParticipanteACompania = (data) =>
   post("/participante/asignarParticipanteACompania", data);
