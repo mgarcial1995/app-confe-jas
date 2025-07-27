@@ -51,7 +51,7 @@ const ModalCompanias = ({
                   <FontAwesomeIcon icon="flag" />
                   <p>
                     Compañia {compania.numero_compania} ({compania.edad_minima}{" "}
-                    - {compania.edad_maxima} años)
+                    - {compania.edad_maxima} años) H: {compania.participantes.filter(e=>e.sexo==='Masculino').length} - M: {compania.participantes.filter(e=>e.sexo==='Femenino').length}
                   </p>
                 </div>
                 <div className="text-2xl text-white">
@@ -73,18 +73,65 @@ const ModalCompanias = ({
               <div className="border-l border-amber-300 ">
                 {compania.open && (
                   <div>
-                    <div className="px-8 pt-2  flex flex-wrap gap-x-6">
-                      {compania.participantes.map((usuario, index) => {
-                        return (
-                          <p key={index} className="flex items-center gap-2">
-                            <FontAwesomeIcon
-                              className="text-[#333333]"
-                              icon="user"
-                            />
-                            {usuario.nombres} {usuario.apellidos}
-                          </p>
-                        );
-                      })}
+                    <div className="px-8 pt-2 flex flex-col md:flex-row gap-4">
+                      <table className="table-auto w-full border">
+                        <thead className="w-full">
+                          <tr className="bg-gray-200">
+                            <th className="px-2 py-1 border"></th>
+                            <th className="px-2 py-1 border">Nombre</th>
+                            <th className="px-2 py-1 border">Edad</th>
+                          </tr>
+                        </thead>
+                        <tbody className="w-full">
+                          {compania.participantes.filter(e=>e.sexo==='Masculino').map((p) => (
+                            <tr key={p.id} className="text-sm">
+                              <td className="border px-2 py-1">
+                                <FontAwesomeIcon
+                                  className={
+                                    p.sexo === "Masculino"
+                                      ? "text-blue-500"
+                                      : "text-pink-500"
+                                  }
+                                  icon="user"
+                                />
+                              </td>
+                              <td className="border px-2 py-1">
+                                {p.nombres} {p.apellidos}
+                              </td>
+                              <td className="border px-2 py-1">{p.edad}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <table className="table-auto w-full border">
+                        <thead className="w-full">
+                          <tr className="bg-gray-200">
+                            <th className="px-2 py-1 border"></th>
+                            <th className="px-2 py-1 border">Nombre</th>
+                            <th className="px-2 py-1 border">Edad</th>
+                          </tr>
+                        </thead>
+                        <tbody className="w-full">
+                          {compania.participantes.filter(e=>e.sexo==='Femenino').map((p) => (
+                            <tr key={p.id} className="text-sm">
+                              <td className="border px-2 py-1">
+                                <FontAwesomeIcon
+                                  className={
+                                    p.sexo === "Masculino"
+                                      ? "text-blue-500"
+                                      : "text-pink-500"
+                                  }
+                                  icon="user"
+                                />
+                              </td>
+                              <td className="border px-2 py-1">
+                                {p.nombres} {p.apellidos}
+                              </td>
+                              <td className="border px-2 py-1">{p.edad}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                     <button
                       onClick={() => asignarCompania(compania.id)}

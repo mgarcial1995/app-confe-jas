@@ -11,6 +11,7 @@ import {
   getParticipantesPorEdadPorCompania,
 } from "../services/services";
 import { useEffect, useState } from "react";
+import ModalCompanias from "../components/ModalCompanias";
 
 const DatosCompania = () => {
   const datocompania = {
@@ -23,10 +24,13 @@ const DatosCompania = () => {
   const navigate = useNavigate();
   const { id, type } = useParams();
   const [compania, setCompania] = useState(datocompania);
+  const [partSeleccionado, setPartSeleccionado] = useState({});
   const [participantes, setParticipantes] = useState([]);
   const [partVarones, setPartVarones] = useState(0);
   const [partMujeres, setParMujeres] = useState(0);
   const [sugerenciaParticipantes, setSugerenciaParticipantes] = useState([]);
+  const [openModalCompania, setOpenModalCompania] = useState(false);
+
 
   useEffect(() => {
     if (type === "edit") {
@@ -113,6 +117,11 @@ const DatosCompania = () => {
       navigate("/companias");
     }
   };
+
+  const cambiarCompania = (participante) => {
+    setPartSeleccionado(participante)
+    setOpenModalCompania(true)
+  }
   return (
     <div>
       <Header
@@ -121,6 +130,15 @@ const DatosCompania = () => {
             ? "Crear Compañia"
             : `Compañia ${compania.numero_compania}`
         }
+      />
+      <ModalCompanias
+        datosParticipante={partSeleccionado}
+        isOpen={openModalCompania}
+        obtenerParticipante={async ()=>{
+          await obtenerParticipantesCompania();
+          await obtenerParticipantesSugerenciaEdadCompania();
+        }}
+        onClose={() => setOpenModalCompania(false)}
       />
       <div>
         <div className="w-full md:w-3/4 h-auto gap-x-8 flex flex-col md:flex-row gap-4">
@@ -217,13 +235,19 @@ const DatosCompania = () => {
                       <td className="border px-2 py-1">{p.edad}</td>
 
                       <td className="border px-2 py-1 ">
-                        <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-center">
+                        <div className="w-full flex flex-col gap-4 items-center justify-center">
                           <Link
                             to={"/participante/edit/" + p.id}
                             className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A] transition"
                           >
                             Ver
                           </Link>
+                          <button
+                            onClick={()=>cambiarCompania(p)}
+                            className="bg-amarillo font-medium cursor-pointer text-white px-3 py-1 rounded bg-[#F8AE1A] transition"
+                          >
+                            Cambiar compañia
+                          </button>
                         </div>
                       </td>
                     </tr>
