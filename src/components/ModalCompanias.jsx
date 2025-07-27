@@ -46,7 +46,10 @@ const ModalCompanias = ({
         {companias.map((compania, i) => {
           return (
             <div key={i} className="w-full">
-              <div onClick={() => abrirCompania(i)} className="w-full flex items-center justify-between text-md font-medium p-2 px-4 rounded-2xl bg-amber-400 text-[#333333]">
+              <div onClick={() => abrirCompania(i)} 
+              className=
+              {`w-full flex items-center justify-between text-md font-medium p-2 px-4 rounded-2xl
+              ${compania.participantes.length === compania.max_cant_participantes? 'bg-red-400' : 'bg-amber-400'} text-[#333333]`}>
                 <div className="flex items-center gap-2">
                   <FontAwesomeIcon icon="flag" />
                   <p>
@@ -133,12 +136,14 @@ const ModalCompanias = ({
                         </tbody>
                       </table>
                     </div>
-                    <button
-                      onClick={() => asignarCompania(compania.id)}
-                      className="py-2 ml-8 mt-2 cursor-pointer font-medium px-4 rounded-md bg-[#F8AE1A] text-white"
-                    >
-                      Asignar
-                    </button>
+                    {compania.participantes.length < compania.max_cant_participantes &&
+                      <button
+                        onClick={() => asignarCompania(compania.id)}
+                        className="py-2 ml-8 mt-2 cursor-pointer font-medium px-4 rounded-md bg-[#F8AE1A] text-white"
+                      >
+                        Asignar
+                      </button>
+                    }
                   </div>
                 )}
                 <div></div>
