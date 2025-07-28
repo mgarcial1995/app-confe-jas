@@ -91,10 +91,11 @@ const DatosParticipante = () => {
     transform.edad = Number(transform.edad);
     transform.id_habitacion = Number(transform.id_habitacion);
     if(type=== 'crear'){
-        await crearParticipante(transform);
-        navigate("/participantes");
+      await crearParticipante(transform);
+      navigate("/participantes");
     } else {
-        console.log(transform)
+      console.log(transform)
+        transform.id_habitacion = transform.id_habitacion === 0 ? null : Number(transform.id_habitacion);
         await editarParticipante(transform);
         navigate("/participantes");
     }
@@ -114,7 +115,7 @@ const DatosParticipante = () => {
         obtenerParticipante={obtenerParticipante}
       />
       <Header text={`${type === "crear" ? "Crear" : "Editar"} Participante`} />
-      { participante.rol === "Coordinador" &&<div>
+      { participante.rol === "Staff" &&<div>
         <p className="text-lg font-bold text-green-500"> {participante.rol || ""} </p>
       </div>}
       {type === "edit" && (
