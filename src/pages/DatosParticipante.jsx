@@ -20,6 +20,10 @@ const DatosParticipante = () => {
     { label: "Masculino", value: "Masculino" },
     { label: "Femenino", value: "Femenino" },
   ];
+  const tipoDoc = [
+    { label: "DNI", value: "DNI" },
+    { label: "C.E.", value: "C.E." },
+  ];
   const tallasOpt = [
     { label: "S", value: "S" },
     { label: "M", value: "M" },
@@ -52,6 +56,8 @@ const DatosParticipante = () => {
     barrio: "",
     estaca: "",
     celular: "",
+    tipo_documento: "",
+    nro_documento: "",
     estado: 1,
     asistencia: false,
   });
@@ -171,6 +177,21 @@ const DatosParticipante = () => {
       <div className="flex flex-col md:flex-row justify-start gap-4">
         <div className="flex flex-col gap-2 ">
           <div className="flex flex-col w-56">
+            <label>Tipo de Documento</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isSearchable
+              name="tipo_documento"
+              onChange={handleChangeSelect}
+              value={{
+                label: participante.tipo_documento || '',
+                value: participante.tipo_documento || '',
+              }}
+              options={tipoDoc}
+            />
+          </div>
+          <div className="flex flex-col w-56">
             <label>Nombres</label>
             <input
               className="outline-none border border-[#333333] rounded-md p-1"
@@ -216,7 +237,6 @@ const DatosParticipante = () => {
             <Select
               className="basic-single"
               classNamePrefix="select"
-              isClearable
               isSearchable
               name="sexo"
               value={{ label: participante.sexo, value: participante.sexo }}
@@ -227,11 +247,20 @@ const DatosParticipante = () => {
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col w-56">
+            <label>Numero de Documento</label>
+            <input
+              className="outline-none border border-[#333333] rounded-md p-1"
+              value={participante.nro_documento}
+              name="nro_documento"
+              type="text"
+              onChange={handleChangeCampos}
+            />
+          </div>
+          <div className="flex flex-col w-56">
             <label>Talla Camiseta</label>
             <Select
               className="basic-single"
               classNamePrefix="select"
-              isClearable
               isSearchable
               name="talla_camiseta"
               onChange={handleChangeSelect}
