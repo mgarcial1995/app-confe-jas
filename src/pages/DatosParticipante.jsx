@@ -114,7 +114,9 @@ const DatosParticipante = () => {
         obtenerParticipante={obtenerParticipante}
       />
       <Header text={`${type === "crear" ? "Crear" : "Editar"} Participante`} />
-
+      { participante.rol === "Coordinador" &&<div>
+        <p className="text-lg font-bold text-green-500"> {participante.rol || ""} </p>
+      </div>}
       {type === "edit" && (
         <div className="flex gap-8 mb-4">
           {participante.num_compania ? (
