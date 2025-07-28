@@ -58,7 +58,7 @@ const TablaParticipantes = ({
         </thead>
         <tbody>
           {datosPagina.map((p) => (
-            <tr key={p.id} className={`text-sm ${p.rol === "Coordinador" ? "bg-sky-800 text-white font-medium" : "" }`}>
+            <tr key={p.id} className={`text-sm ${p.rol === "Staff" ? "bg-sky-800 text-white font-medium" : "" }`}>
               <td className="border px-2 py-1">
                 {p.nombres} {p.apellidos}
               </td>
